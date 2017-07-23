@@ -22,7 +22,7 @@
   firebase.initializeApp(config);
 
   var text = document.getElementById('texto');
-  var dbRef = firebase.database().ref().child('array');
+  var dbRef = firebase.database().ref().child('postList');
   dbRef.on('value',snap => console.log(snap.val()));
 
 </script>
