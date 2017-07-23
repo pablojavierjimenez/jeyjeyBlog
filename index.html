@@ -7,7 +7,7 @@
     <title>Jey Jey Blog</title>
 </head>
 <body>
-<h1 id="texto"></h1>
+<pre id="texto"></pre>
 <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
 <script>
   // Initialize Firebase
@@ -23,7 +23,9 @@
 
   var text = document.getElementById('texto');
   var dbRef = firebase.database().ref().child('postList');
-  dbRef.on('value',snap => console.log(snap.val()));
+  dbRef.on('value',snap => {
+    text.innerHTML = JSON.stringify(snap.val());
+  });
 
 </script>
 </body>
