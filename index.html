@@ -22,7 +22,8 @@
   firebase.initializeApp(config);
 
   var text = document.getElementById('texto');
-  var dbRef = firebase.database().ref().child('title')
+  var dbRef = firebase.database().ref().child('title');
+  dbRef.on('value',snap => text.innerHTML = snap.val());
 
 </script>
 </body>
