@@ -23,8 +23,10 @@
 
   var text = document.getElementById('texto');
   var dbRef = firebase.database().ref().child('postList');
+  var data = [];
   dbRef.on('value',snap => {
-    text.innerHTML = JSON.stringify(snap.val(), null, 3);
+    data = snap.val();
+    text.innerHTML = JSON.stringify(data, null, 3);
   });
 
 </script>
