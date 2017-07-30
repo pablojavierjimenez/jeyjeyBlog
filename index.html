@@ -61,6 +61,7 @@ function createtemplate (el, data) {
           `;
 		temp = temp + partial;
     })
+    el.innerHTML = temp;
     return temp;
 }
 
@@ -77,14 +78,15 @@ function createtemplate (el, data) {
   };
   firebase.initializeApp(config);
 
-  var text = document.getElementById('postListContainer');
+  var el = document.getElementById('postListContainer');
   var dbRef = firebase.database().ref().child('postList');
   var data = [];
   dbRef.on('value',snap => {
     data = snap.val();
+    createtemplate(el, data)
   });
 
-  function viewUpdate ( template, data) {
+  function viewUpdate ( data) {
     text.innerHTML = JSON.stringify(data, null, 3);
 
   }
