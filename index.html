@@ -7,9 +7,65 @@
     <title>Jey Jey Blog</title>
 </head>
 <body>
-<pre id="texto"></pre>
+<section id="postListContainer"></section>
+
 <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
 <script>
+
+  /*
+    // DATA MODEL EXAMPLE
+    data = [
+      {
+          "content": "kmfglknsfbkngmñbk",
+          "id": "01",
+          "mediaType": "video",
+          "mediaUrl": "https://www.youtube.com/watch?v=IRI1H5tyEAo",
+          "tags": "#css,#css2017,#cssConf",
+          "title": "primer post post ta"
+      }
+    ];
+  */
+var data2 = [
+   {
+      "content": "kmfglknsfbkngmñbk",
+      "id": "01",
+      "mediaType": "video",
+      "mediaUrl": "https://www.youtube.com/watch?v=IRI1H5tyEAo",
+      "tags": "#css,#css2017,#cssConf",
+      "title": "0000000000000000000"
+   },
+	{
+      "content": "kmfglknsfbkngmñbk",
+      "id": "01",
+      "mediaType": "video",
+      "mediaUrl": "https://www.youtube.com/watch?v=IRI1H5tyEAo",
+      "tags": "#css,#css2017,#cssConf",
+      "title": "1111111111111"
+   }
+];
+
+function createtemplate (el, data) {
+    var temp = '';
+    data.forEach(  (x) =>  {
+       let partial = `
+          <article class="post">
+            <h2 class="postTitle">${x.title}</h2>
+            <div class="postTags">${x.tags}</div>
+            <div class="postContainer">
+              <p class="postContent">${x.content}</p>
+              <div class="postMediaContainer">
+                ${x.mediaType}
+              </div>
+            </div>
+          </article>
+          `;
+		temp = temp + partial;
+    })
+    return temp;
+}
+
+
+
   // Initialize Firebase
   var config = {
     apiKey: "AIzaSyBW2oLsarH1LixittA5al4xITO4Nu0RCu4",
@@ -21,14 +77,17 @@
   };
   firebase.initializeApp(config);
 
-  var text = document.getElementById('texto');
+  var text = document.getElementById('postListContainer');
   var dbRef = firebase.database().ref().child('postList');
   var data = [];
   dbRef.on('value',snap => {
     data = snap.val();
-    text.innerHTML = JSON.stringify(data, null, 3);
   });
 
+  function viewUpdate ( template, data) {
+    text.innerHTML = JSON.stringify(data, null, 3);
+
+  }
 </script>
 </body>
 </html>
