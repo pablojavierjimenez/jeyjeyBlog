@@ -33,7 +33,8 @@ iframe.postMedia{
 @media only screen and (max-width: 480px) {
     .postMedia {
       height: 203px;
-      width: 360px;
+      width:100%;
+      max-width: 360px;
       margin: auto;
     }
 }
