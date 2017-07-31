@@ -14,9 +14,6 @@
   padding: .5rem;
   margin: 0 .5rem 2rem;
   border-bottom: .8rem solid #000;
-  perspective: 5000px;
-  perspective-origin: top;
-  transform-style: preserve-3d;
   font-family: sans-serif;
 }
 .postTitle {
