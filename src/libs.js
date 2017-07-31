@@ -60,11 +60,11 @@ $.filterMediaByType = ( type, url ) => {
     switch(type){
         case 'ytVideo':
             media = `
-                <iframe src="https://www.youtube.com/embed/${$.getYouTubeVideoId(url)}" frameborder="0" allowfullscreen></iframe>
+                <iframe class="postMedia mediaTypeYtvideo" src="https://www.youtube.com/embed/${$.getYouTubeVideoId(url)}" frameborder="0" allowfullscreen></iframe>
             `;
             break;
         case 'img':
-            media = `<img class="mediaTipeImage" src="${url}" />`;
+            media = `<img class="postMedia mediaTypeImage" src="${url}" />`;
             break;
         default:
         console.log('no se que paso');
@@ -85,7 +85,7 @@ $.createtemplate = (el, data) => {
   data.forEach(  (x) =>  {
     let  wrapper = document.createElement('article');
     wrapper.setAttribute("class", "post");
-
+    wrapper.setAttribute("tags", x.tags);
     wrapper.innerHTML = `
       <h2 class="postTitle">${x.title}</h2>
       <div class="postTags">${$.createTagList(x.tags)}</div>
@@ -119,3 +119,23 @@ $.createTagList = (tags) => {
     })
     return finalTag;
 }
+
+$.hidePostBySelectedTag = (classNameOftargetElement, classNameToAdd, selectedTag) => {
+  var elementList = document.getElementsByClassName(classNameOftargetElement);
+  var selectedTag = selectedTag || location.hash;
+  for (i = 0; i < elementList.length; i++){
+    var item = elementList[i];
+    if ( selectedTag === "" || selectedTag === '#home' ) {
+      item.classList.remove(classNameToAdd);
+    } else {
+      var hasTag = ( !(item.getAttribute('tags').split(',').indexOf(selectedTag) >= 0) ) ? item.classList.add(classNameToAdd) : item.classList.remove(classNameToAdd);
+    }
+  }
+  return false;
+}
+
+$.locationHashChanged = () => {
+  $.hidePostBySelectedTag('post', 'hide', location.hash);
+}
+
+window.onhashchange = $.locationHashChanged;
