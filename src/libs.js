@@ -43,7 +43,7 @@ $.getYouTubeVideoId = (youTubeUrl) => {
     var ytvId = ytUrl.split('/').pop();
     var isCleanId = (ytvId.indexOf('=') <= 0) ? true : false;
     if ( !isCleanId ) {
-      ytId = ytUrl.split('=').pop();
+      ytvId = ytUrl.split('=').pop();
     }
     return ytvId;
 };
