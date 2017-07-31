@@ -30,7 +30,7 @@
 iframe.postMedia{
   min-height: 113px;
 }
-@media only screen and (max-width: 360px) {
+@media only screen and (max-width: 480px) {
     .postMedia {
       height: 203px;
       width: 360px;
