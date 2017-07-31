@@ -21,10 +21,9 @@
 }
 .postMediaContainer {
   text-align: center;
-  padding: .5rem 1rem;
 }
 .postMedia {
-  width: 80%;
+  width: 100%;
   max-height: 360px;
   margin: auto;
 }
