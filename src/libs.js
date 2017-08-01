@@ -1,6 +1,6 @@
 /*
 // DATA MODEL EXAMPLE
-data = [
+  data = [
     {
         "content": "kmfglknsfbkngmñbk",
         "id": "01",
@@ -9,26 +9,8 @@ data = [
         "tags": "#css,#css2017,#cssConf",
         "title": "primer post post ta"
     }
-];
+  ];
 */
-var data2 = [
-    {
-        "content": "kmfglknsfbkngmñbk",
-        "id": "01",
-        "mediaType": "video",
-        "mediaUrl": "https://www.youtube.com/watch?v=IRI1H5tyEAo",
-        "tags": "#css,#css2017,#cssConf",
-        "title": "0000000000000000000"
-    },
-    {
-        "content": "kmfglknsfbkngmñbk",
-        "id": "01",
-        "mediaType": "video",
-        "mediaUrl": "https://www.youtube.com/watch?v=IRI1H5tyEAo",
-        "tags": "#css,#css2017,#cssConf",
-        "title": "1111111111111"
-    }
-];
 
 var $ = {};
 
@@ -69,7 +51,6 @@ $.filterMediaByType = ( type, url ) => {
         default:
         console.log('no se que paso');
         break;
-
     }
     return media;
 };
@@ -114,12 +95,19 @@ $.createTagList = (tags) => {
         var singleTagElement = `
             <a class="tagElement" href="${tag}">${tag}</a>
         `;
-
         finalTag = finalTag + singleTagElement;
     })
     return finalTag;
 }
 
+/**
+ * hidePostBySelectedTag
+ *
+ * @param {string} classNameOftargetElement
+ * @param {string} classNameToAdd
+ * @param {string} selectedTag
+ * @return {boolean} false
+ */
 $.hidePostBySelectedTag = (classNameOftargetElement, classNameToAdd, selectedTag) => {
   var elementList = document.getElementsByClassName(classNameOftargetElement);
   var selectedTag = selectedTag || location.hash;
@@ -133,9 +121,7 @@ $.hidePostBySelectedTag = (classNameOftargetElement, classNameToAdd, selectedTag
   }
   return false;
 }
-
 $.locationHashChanged = () => {
   $.hidePostBySelectedTag('post', 'hide', location.hash);
 }
-
 window.onhashchange = $.locationHashChanged;
