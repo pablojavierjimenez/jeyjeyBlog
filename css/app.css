@@ -24,6 +24,11 @@
   font-size: 2.5rem;
   letter-spacing: .3rem;
 }
+.postContent {
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow: ellipsis;
+}
 .postMediaContainer {
   text-align: center;
 }
@@ -32,12 +37,37 @@
   height: 360px;
   margin: auto;
 }
+.tagElement {
+    color: hsl(200, 50%, 10%);
+    font-weight: bold;
+    text-decoration: none;
+    padding: .2rem;
+    font-size: .9rem;
+    line-height: 2rem;
+}
+
+.tagElement:hover {
+    color: #fff;
+    background-color: black;
+}
+
 iframe.postMedia{
   min-height: 113px;
 }
 
-@media o{
-  .postTitle{
-    font-size: 1.8rem;
-  }
+@media only screen and (max-width: 480px) {
+    .postTitle{
+      font-size: 1.8rem;
+      letter-spacing: initial;
+      padding: .5rem;
+      font-weight: normal;
+      word-break: break-all;
+    }
+    .postMedia {
+      height: 203px;
+      width:100%;
+      max-width: 360px;
+      margin: auto;
+    }
+
 }
