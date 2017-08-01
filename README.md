@@ -1,6 +1,7 @@
 # jeyjeyBlog
-Jey Jey Blog is a proyect where I want to do a cuple of thing:
+[https://pablojavierjimenez.github.io/jeyjeyBlog/](https://pablojavierjimenez.github.io/jeyjeyBlog/)
 
+Jey Jey Blog is a proyect where I want to do a cuple of thing:
 - usar firebase as a backend
 - create a PWA
 - use a pure js
