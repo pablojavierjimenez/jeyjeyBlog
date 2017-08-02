@@ -5,9 +5,9 @@
         "content": "kmfglknsfbkngmñbk",
         "id": "01",
         "mediaType": "video",
-        "mediaUrl": "https://www.youtube.com/watch?v=IRI1H5tyEAo",
-        "tags": "#css,#css2017,#cssConf",
-        "title": "primer post post ta"
+        "mediaUrl": "https://www.youtube.com/watch?v=kZOJCVvyF-4",
+        "tags": "#LeaVerou,#CSSVariables,#css,#css2017,#cssConf,#CSSConfAsia2016",
+        "title": "Lea Verou: CSS Variables"
     }
   ];
 */
@@ -64,17 +64,26 @@ $.filterMediaByType = ( type, url ) => {
 $.createtemplate = (el, data) => {
   var temp = '';
   data.forEach(  (x) =>  {
-    let  wrapper = document.createElement('article');
-    wrapper.setAttribute("class", "post");
-    wrapper.setAttribute("tags", x.tags);
+    let wrapper = document.createElement('article');
+    let postFullPath = `#!/postId/${x.id}/postTitle/${x.title.split(' ').join('-')}`;
+    wrapper.setAttribute( "class", "post" );
+    wrapper.setAttribute( "id", postFullPath );
+    wrapper.setAttribute( "tags", ( x.tags + "," + postFullPath ) );
     wrapper.innerHTML = `
-      <h2 class="postTitle">${x.title}</h2>
+      <h2 class="postTitle">
+        <a href="${postFullPath}">
+          ${x.title}
+        </a>
+        <buttom id="post-${x.id}" class="isFavoritePost" isFavorite="false">
+          #❤
+        </buttom>
+      </h2>
       <div class="postTags">${$.createTagList(x.tags)}</div>
       <div class="postContainer">
-        <p class="postContent">${x.content}</p>
         <div class="postMediaContainer">
           ${$.filterMediaByType( x.mediaType, x.mediaUrl )}
         </div>
+        <p class="postContent">${x.content}</p>
       </div>
       `;
     el.prepend(wrapper);
@@ -121,6 +130,16 @@ $.hidePostBySelectedTag = (classNameOftargetElement, classNameToAdd, selectedTag
   }
   return false;
 }
+
+$.toggleFavorite = (e) => {
+  var target = e.srcElement || e.target;
+	var element = document.getElementById(target.id);
+	var der = element.getAttributeNode('isfavorite');
+
+	debugger;
+	return element;
+};
+
 $.locationHashChanged = () => {
   $.hidePostBySelectedTag('post', 'hide', location.hash);
 }

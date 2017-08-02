@@ -16,6 +16,9 @@
   border-bottom: .8rem solid #000;
   font-family: sans-serif;
 }
+.post:target {
+  display: block;
+}
 .postTitle {
   font-family: 'Pacifico', Verdana, Geneva, Tahoma, sans-serif;
   background-color: #000;
@@ -23,6 +26,14 @@
   padding: .5rem 2rem;
   font-size: 2.5rem;
   letter-spacing: .3rem;
+}
+.postTitle a{
+ color: #fff;
+ text-decoration: none;
+}
+
+.postTags{
+  padding: 0 .5rem .9rem;
 }
 .postContent {
   overflow:hidden;
@@ -42,10 +53,12 @@
     font-weight: bold;
     text-decoration: none;
     padding: .2rem;
-    font-size: .9rem;
-    line-height: 2rem;
+    font-size: .8rem;
+    line-height: 1.4rem;
 }
-
+buttom[isFavorite=true] {
+    color: red;
+}
 .tagElement:hover {
     color: #fff;
     background-color: black;
