@@ -63,32 +63,55 @@ $.filterMediaByType = ( type, url ) => {
  */
 $.createtemplate = (el, data) => {
   var temp = '';
-  data.forEach(  (x) =>  {
-    let wrapper = document.createElement('article');
-    let postFullPath = `#!/postId/${x.id}/postTitle/${x.title.split(' ').join('-')}`;
-    wrapper.setAttribute( "class", "post" );
-    wrapper.setAttribute( "id", postFullPath );
-    wrapper.setAttribute( "tags", ( x.tags + "," + postFullPath ) );
-    wrapper.innerHTML = `
-      <h2 class="postTitle">
-        <a href="${postFullPath}">
-          ${x.title}
-        </a>
-        <buttom id="post-${x.id}" class="isFavoritePost" isFavorite="false">
-          #❤
-        </buttom>
-      </h2>
-      <div class="postTags">${$.createTagList(x.tags)}</div>
-      <div class="postContainer">
-        <div class="postMediaContainer">
-          ${$.filterMediaByType( x.mediaType, x.mediaUrl )}
-        </div>
-        <p class="postContent">${x.content}</p>
-      </div>
-      `;
+  data.forEach(  (item) =>  {
+    let wrapper = $.createPostContainer(item);
+    wrapper.innerHTML = $.createPost(item);
     el.prepend(wrapper);
   })
   return false;
+};
+
+/**
+ * createPost
+ *
+ * @param {Object} item Recive a string whith the post taglist separated by comms
+ * @return {DOM element}
+ */
+$.createPostContainer = (item) => {
+  let postFullPath = `#!/postId/${item.id}/postTitle/${item.title.split(' ').join('-')}`;
+  let wrapper = document.createElement('article');
+  wrapper.setAttribute( "class", "post" );
+  wrapper.setAttribute( "id", postFullPath );
+  wrapper.setAttribute( "tags", ( item.tags + "," + postFullPath ) );
+  return wrapper;
+};
+
+/**
+ * createPost
+ *
+ * @param {Object} item Recive a string whith the post taglist separated by comms
+ * @return {string}
+ */
+$.createPost = (item) => {
+  let postString = "<div><h1> Ha ocurrido un error en $.create post</h1></div>";
+  postString =`
+    <h2 class="postTitle">
+      <a href="#!/postId/${item.id}/postTitle/${item.title.split(' ').join('-')}">
+        ${item.title}
+      </a>
+      <buttom id="post-${item.id}" class="isFavoritePost" isFavorite="false">
+        #❤
+      </buttom>
+    </h2>
+    <div class="postTags">${$.createTagList(item.tags)}</div>
+    <div class="postContainer">
+      <div class="postMediaContainer">
+        ${$.filterMediaByType( item.mediaType, item.mediaUrl )}
+      </div>
+      <p class="postContent">${item.content}</p>
+    </div>
+    `;
+  return postString;
 };
 
 /**
@@ -144,3 +167,42 @@ $.locationHashChanged = () => {
   $.hidePostBySelectedTag('post', 'hide', location.hash);
 }
 window.onhashchange = $.locationHashChanged;
+
+var el = document.getElementsByClassName('isFavoritePost');
+
+function toggleFavorite(e) {
+  var target = e.srcElement || e.target;
+
+  /**
+   ***** Is Favorite Buttom *****
+   */
+  var element = document.getElementById(target.id);
+  var actualIsFavoriteAttributes = element.getAttributeNode('isfavorite');
+  var att = document.createAttribute('isfavorite');
+  if(actualIsFavoriteAttributes.value === "true"){
+    att.value = "false";
+  } else {
+    att.value = "true";
+  }
+  element.setAttributeNode(att);
+
+  /**
+   ****** Parent Article *******
+   */
+  var parentArticle = element.parentElement.parentElement;
+  var actualTagsAttributesOfParentArticle = parentArticle.getAttributeNode('tags');
+  var acttualArticleTagsArray = actualTagsAttributesOfParentArticle.value.split(',');
+  if(acttualArticleTagsArray[acttualArticleTagsArray.length - 1] === "#❤"){
+    acttualArticleTagsArray.pop()
+  } else {
+    acttualArticleTagsArray.push("#❤");
+  }
+  var newParentArticleTagsAttributes = document.createAttribute('tags');
+  newParentArticleTagsAttributes.value = acttualArticleTagsArray.join();
+  parentArticle.setAttributeNode(newParentArticleTagsAttributes);
+}
+
+for(var i=0; i <= ( el.length -1 ); i++){
+	console.log(i)
+	el[i].addEventListener("click", toggleFavorite, false);
+}
