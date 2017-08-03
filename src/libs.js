@@ -68,6 +68,8 @@ $.createtemplate = (el, data) => {
     wrapper.innerHTML = $.createPost(item);
     el.prepend(wrapper);
   })
+
+  $.createIsFavoriteHandler();
   return false;
 };
 
@@ -156,22 +158,6 @@ $.hidePostBySelectedTag = (classNameOftargetElement, classNameToAdd, selectedTag
 
 $.toggleFavorite = (e) => {
   var target = e.srcElement || e.target;
-	var element = document.getElementById(target.id);
-	var der = element.getAttributeNode('isfavorite');
-
-	debugger;
-	return element;
-};
-
-$.locationHashChanged = () => {
-  $.hidePostBySelectedTag('post', 'hide', location.hash);
-}
-window.onhashchange = $.locationHashChanged;
-
-var el = document.getElementsByClassName('isFavoritePost');
-
-function toggleFavorite(e) {
-  var target = e.srcElement || e.target;
 
   /**
    ***** Is Favorite Buttom *****
@@ -200,9 +186,20 @@ function toggleFavorite(e) {
   var newParentArticleTagsAttributes = document.createAttribute('tags');
   newParentArticleTagsAttributes.value = acttualArticleTagsArray.join();
   parentArticle.setAttributeNode(newParentArticleTagsAttributes);
+	return element;
+};
+
+$.locationHashChanged = () => {
+  $.hidePostBySelectedTag('post', 'hide', location.hash);
 }
 
-for(var i=0; i <= ( el.length -1 ); i++){
-	console.log(i)
-	el[i].addEventListener("click", toggleFavorite, false);
+$.createIsFavoriteHandler = () => {
+  var el = document.getElementsByClassName('isFavoritePost');
+  for(var i=0; i <= ( el.length -1 ); i++){
+    console.log(i)
+    el[i].addEventListener("click", $.toggleFavorite, false);
+  }
+
 }
+
+window.onhashchange = $.locationHashChanged;
