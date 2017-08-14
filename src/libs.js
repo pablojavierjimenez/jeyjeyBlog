@@ -4,7 +4,7 @@
     {
         "content": "kmfglknsfbkngmñbk",
         "id": "01",
-        "mediaType": "video",
+        "mediaType": "ytVideo",
         "mediaUrl": "https://www.youtube.com/watch?v=kZOJCVvyF-4",
         "tags": "#LeaVerou,#CSSVariables,#css,#css2017,#cssConf,#CSSConfAsia2016",
         "title": "Lea Verou: CSS Variables"
